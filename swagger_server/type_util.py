@@ -14,7 +14,7 @@ if sys.version_info < (3, 7):
         return klass.__extra__ == dict
 
     def is_list(klass):
-        """ Determine whether klass is a List """
+        """ Determine whether klass is a  List """
         return klass.__extra__ == list
 
 else:
