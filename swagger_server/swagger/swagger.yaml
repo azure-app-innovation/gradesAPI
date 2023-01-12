@@ -35,7 +35,7 @@ paths:
       - name: buid
         in: query
         description: The caller's BUID
-        required: false
+        required: true
         style: form
         explode: true
         schema:
@@ -81,7 +81,7 @@ paths:
       - name: buid
         in: query
         description: The caller's BUID
-        required: false
+        required: true
         style: form
         explode: true
         schema:
@@ -168,7 +168,7 @@ paths:
       - name: buid
         in: query
         description: The caller's BUID
-        required: false
+        required: true
         style: form
         explode: true
         schema:
@@ -298,7 +298,7 @@ paths:
       - name: buid
         in: query
         description: The caller's BUID
-        required: false
+        required: true
         style: form
         explode: true
         schema:
@@ -344,7 +344,7 @@ paths:
       - name: buid
         in: query
         description: The caller's BUID
-        required: false
+        required: true
         style: form
         explode: true
         schema:
@@ -386,7 +386,7 @@ paths:
       - name: buid
         in: query
         description: The caller's BUID
-        required: false
+        required: true
         style: form
         explode: true
         schema:
@@ -429,7 +429,7 @@ paths:
       - name: buid
         in: query
         description: The caller's BUID
-        required: false
+        required: true
         style: form
         explode: true
         schema:
