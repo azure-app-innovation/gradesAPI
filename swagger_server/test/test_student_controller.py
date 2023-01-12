@@ -19,6 +19,7 @@ class TestStudentController(BaseTestCase):
         Enroll a new student to the university
         """
         body = Student()
+        query_string = [('buid', 'buid_example')]
         data = dict(university_id='university_id_example',
                     name='name_example',
                     semester_enrolled='2013-10-20T19:20:30+01:00',
@@ -28,7 +29,8 @@ class TestStudentController(BaseTestCase):
             method='POST',
             data=json.dumps(body),
             data=data,
-            content_type='application/json')
+            content_type='application/json',
+            query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
@@ -50,7 +52,8 @@ class TestStudentController(BaseTestCase):
 
         Finds Students by status
         """
-        query_string = [('status', 'enrolled')]
+        query_string = [('buid', 'buid_example'),
+                        ('status', 'enrolled')]
         response = self.client.open(
             '/api/v3/student/findByStatus',
             method='GET',
@@ -74,9 +77,11 @@ class TestStudentController(BaseTestCase):
 
         Lists student grades in a class
         """
+        query_string = [('buid', 'buid_example')]
         response = self.client.open(
             '/api/v3/student/{studentId}/{classId}/listGrades'.format(student_id='student_id_example', class_id='class_id_example'),
-            method='POST')
+            method='POST',
+            query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
@@ -86,6 +91,7 @@ class TestStudentController(BaseTestCase):
         Update an existing student
         """
         body = Student()
+        query_string = [('buid', 'buid_example')]
         data = dict(university_id='university_id_example',
                     name='name_example',
                     semester_enrolled='2013-10-20T19:20:30+01:00',
@@ -95,7 +101,8 @@ class TestStudentController(BaseTestCase):
             method='PUT',
             data=json.dumps(body),
             data=data,
-            content_type='application/json')
+            content_type='application/json',
+            query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
