@@ -1,0 +1,541 @@
+openapi: 3.0.3
+info:
+  title: Swagger DS/CS 519 Assessment - OpenAPI 3.0
+  description: "This is the grading API for the course assessment. \n\nSome useful\
+    \ links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n\
+    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)"
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: nagendra@bu.edu
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: https://petstore3.swagger.io/api/v3
+tags:
+- name: Grading API
+  description: This API can be used to perform operations on student grades
+- name: student
+  description: Access to Students
+- name: class
+  description: Access to Classes
+paths:
+  /student:
+    post:
+      tags:
+      - student
+      summary: Enroll a new student to the university
+      description: Adds a new student to the university
+      operationId: add_student
+      requestBody:
+        description: Create a new student in the university
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "405":
+          description: Invalid input
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+      x-openapi-router-controller: swagger_server.controllers.student_controller
+  /student/findByStatus:
+    get:
+      tags:
+      - student
+      summary: Finds Students by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: find_students_by_status
+      parameters:
+      - name: status
+        in: query
+        description: Status values that need to be considered for filter
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - enrolled
+          - graduated
+          - unenrolled
+          default: enrolled
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+                x-content-type: application/json
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        "400":
+          description: Invalid status value
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+      x-openapi-router-controller: swagger_server.controllers.student_controller
+  /student/{studentId}:
+    get:
+      tags:
+      - student
+      summary: Find student by ID
+      description: Returns a single student
+      operationId: get_student_by_id
+      parameters:
+      - name: studentId
+        in: path
+        description: ID of student to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Pet not found
+      security:
+      - api_key: []
+      - petstore_auth:
+        - write:pets
+        - read:pets
+      x-openapi-router-controller: swagger_server.controllers.student_controller
+    put:
+      tags:
+      - student
+      summary: Update an existing student
+      description: Update an existing student by Id
+      operationId: update_student
+      parameters:
+      - name: studentId
+        in: path
+        description: ID of student to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Update an existent student enrolled in the university
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Student'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Student not found
+        "405":
+          description: Validation exception
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+      x-openapi-router-controller: swagger_server.controllers.student_controller
+    post:
+      tags:
+      - student
+      summary: Updates a student in the university with form data
+      description: ""
+      operationId: update_student_with_form
+      parameters:
+      - name: studentId
+        in: path
+        description: ID of student that needs to be updated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: name
+        in: query
+        description: Name of student that needs to be updated
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Status of student that needs to be updated
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "405":
+          description: Invalid input
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+      x-openapi-router-controller: swagger_server.controllers.student_controller
+    delete:
+      tags:
+      - student
+      summary: Deletes a student
+      description: delete a student
+      operationId: delete_student
+      parameters:
+      - name: api_key
+        in: header
+        description: ""
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: studentId
+        in: path
+        description: Student id to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "400":
+          description: Invalid studentID value
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+      x-openapi-router-controller: swagger_server.controllers.student_controller
+  /student/{studentId}/{classId}/listGrades:
+    post:
+      tags:
+      - student
+      summary: Lists student grades in a class
+      description: Lists student grades in a class
+      operationId: list_grades
+      parameters:
+      - name: studentId
+        in: path
+        description: ID of the student whose grades to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: classId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+                x-content-type: application/json
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+      x-openapi-router-controller: swagger_server.controllers.student_controller
+  /class/listBySemister:
+    get:
+      tags:
+      - class
+      summary: Returns a list of classes offered by semister
+      description: Returns a listing of classes offered by semister
+      operationId: list_classes
+      parameters:
+      - name: semister
+        in: query
+        description: Filter the class list by this semister
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - fall
+          - spring
+          - summer
+          default: fall
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Class'
+                x-content-type: application/json
+      security:
+      - api_key: []
+      x-openapi-router-controller: swagger_server.controllers.class_controller
+  /class/{classId}/listStudents:
+    get:
+      tags:
+      - class
+      summary: Returns a list of students enrolled in the class
+      description: Returns a list of students enrolled in the class
+      operationId: list_students
+      parameters:
+      - name: classId
+        in: path
+        description: Filter the student list by this classID
+        required: true
+        style: simple
+        explode: true
+        schema:
+          type: string
+          default: cs101
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int32
+                x-content-type: application/json
+      security:
+      - api_key: []
+      x-openapi-router-controller: swagger_server.controllers.class_controller
+  /class/{classId}/ListAssignments:
+    get:
+      tags:
+      - class
+      summary: Lists assignments for the class
+      description: Lists assignments for the class
+      operationId: list_assignments
+      parameters:
+      - name: classId
+        in: path
+        description: List assignments for the class with this classID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Assignment'
+                x-content-type: application/json
+        "405":
+          description: Invalid input
+      x-openapi-router-controller: swagger_server.controllers.class_controller
+components:
+  schemas:
+    Grade:
+      type: object
+      properties:
+        gradeId:
+          type: string
+          example: G1234556
+        assignmentId:
+          type: string
+          example: A198772
+        studentId:
+          type: string
+          example: U123456
+        value:
+          type: integer
+          format: int64
+          example: 76
+        complete:
+          type: boolean
+      example:
+        studentId: U123456
+        gradeId: G1234556
+        complete: true
+        assignmentId: A198772
+        value: 76
+      xml:
+        name: order
+    Assignment:
+      type: object
+      properties:
+        assignmentId:
+          type: string
+          example: A123456
+        date:
+          type: string
+          format: date-time
+        weight:
+          type: integer
+          format: int64
+          example: 90
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        weight: 90
+        assignmentId: A123456
+      xml:
+        name: Assignment
+    Class:
+      type: object
+      properties:
+        classId:
+          type: string
+          example: C123456
+        title:
+          type: string
+          example: DS 519
+        description:
+          type: string
+          example: Introduction to software methodology
+        meetingTime:
+          type: string
+          example: TR 1700-1830
+        meetingLocation:
+          type: string
+          example: B52
+        status:
+          type: string
+          example: active
+          enum:
+          - active
+          - inactive
+      example:
+        meetingTime: TR 1700-1830
+        classId: C123456
+        description: Introduction to software methodology
+        meetingLocation: B52
+        title: DS 519
+        status: active
+      xml:
+        name: class
+    Student:
+      required:
+      - name
+      - universityId
+      type: object
+      properties:
+        universityId:
+          type: string
+          example: U1234567
+        name:
+          type: string
+          example: Andrew F. Rosas
+        semesterEnrolled:
+          type: string
+          format: date-time
+        status:
+          type: string
+          description: Current Status at the university
+          enum:
+          - enrolled
+          - graduated
+          - unenrolled
+      example:
+        universityId: U1234567
+        semesterEnrolled: 2000-01-23T04:56:07.000+00:00
+        name: Andrew F. Rosas
+        status: enrolled
+      xml:
+        name: pet
+  requestBodies:
+    Student:
+      description: Student object that needs to be added to the system
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Student'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Student'
+    StudentArray:
+      description: List of students object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Student'
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+      x-tokenInfoFunc: swagger_server.controllers.authorization_controller.check_petstore_auth
+      x-scopeValidateFunc: swagger_server.controllers.authorization_controller.validate_scope_petstore_auth
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
+      x-apikeyInfoFunc: swagger_server.controllers.authorization_controller.check_api_key
+
