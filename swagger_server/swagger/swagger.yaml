@@ -535,7 +535,7 @@ components:
         name:
           type: string
           example: Andrew F. Rosas
-        semesterEnrolled:
+        dateEnrolled:
           type: string
           format: date-time
         status:
@@ -547,8 +547,8 @@ components:
           - unenrolled
       example:
         universityId: U1234567
-        semesterEnrolled: 2000-01-23T04:56:07.000+00:00
         name: Andrew F. Rosas
+        dateEnrolled: 2000-01-23T04:56:07.000+00:00
         status: enrolled
       xml:
         name: pet

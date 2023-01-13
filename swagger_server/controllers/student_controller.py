@@ -23,7 +23,7 @@ def add_student(body, buid):  # noqa: E501
     return 'do some magic!'
 
 
-def add_student(university_id, name, semester_enrolled, status, buid):  # noqa: E501
+def add_student(university_id, name, date_enrolled, status, buid):  # noqa: E501
     """Enroll a new student to the university
 
     Adds a new student to the university # noqa: E501
@@ -32,8 +32,8 @@ def add_student(university_id, name, semester_enrolled, status, buid):  # noqa: 
     :type university_id: str
     :param name: 
     :type name: str
-    :param semester_enrolled: 
-    :type semester_enrolled: str
+    :param date_enrolled: 
+    :type date_enrolled: str
     :param status: 
     :type status: str
     :param buid: The caller&#x27;s BUID
@@ -41,7 +41,7 @@ def add_student(university_id, name, semester_enrolled, status, buid):  # noqa: 
 
     :rtype: Student
     """
-    semester_enrolled = util.deserialize_datetime(semester_enrolled)
+    date_enrolled = util.deserialize_datetime(date_enrolled)
     return 'do some magic!'
 
 
@@ -124,7 +124,7 @@ def update_student(body, buid, student_id):  # noqa: E501
     return 'do some magic!'
 
 
-def update_student(university_id, name, semester_enrolled, status, buid, student_id):  # noqa: E501
+def update_student(university_id, name, date_enrolled, status, buid, student_id):  # noqa: E501
     """Update an existing student
 
     Update an existing student by Id # noqa: E501
@@ -133,8 +133,8 @@ def update_student(university_id, name, semester_enrolled, status, buid, student
     :type university_id: str
     :param name: 
     :type name: str
-    :param semester_enrolled: 
-    :type semester_enrolled: str
+    :param date_enrolled: 
+    :type date_enrolled: str
     :param status: 
     :type status: str
     :param buid: The caller&#x27;s BUID
@@ -144,7 +144,7 @@ def update_student(university_id, name, semester_enrolled, status, buid, student
 
     :rtype: Student
     """
-    semester_enrolled = util.deserialize_datetime(semester_enrolled)
+    date_enrolled = util.deserialize_datetime(date_enrolled)
     return 'do some magic!'
 
 

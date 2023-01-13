@@ -14,34 +14,34 @@ class Student(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, university_id: str=None, name: str=None, semester_enrolled: datetime=None, status: str=None):  # noqa: E501
+    def __init__(self, university_id: str=None, name: str=None, date_enrolled: datetime=None, status: str=None):  # noqa: E501
         """Student - a model defined in Swagger
 
         :param university_id: The university_id of this Student.  # noqa: E501
         :type university_id: str
         :param name: The name of this Student.  # noqa: E501
         :type name: str
-        :param semester_enrolled: The semester_enrolled of this Student.  # noqa: E501
-        :type semester_enrolled: datetime
+        :param date_enrolled: The date_enrolled of this Student.  # noqa: E501
+        :type date_enrolled: datetime
         :param status: The status of this Student.  # noqa: E501
         :type status: str
         """
         self.swagger_types = {
             'university_id': str,
             'name': str,
-            'semester_enrolled': datetime,
+            'date_enrolled': datetime,
             'status': str
         }
 
         self.attribute_map = {
             'university_id': 'universityId',
             'name': 'name',
-            'semester_enrolled': 'semesterEnrolled',
+            'date_enrolled': 'dateEnrolled',
             'status': 'status'
         }
         self._university_id = university_id
         self._name = name
-        self._semester_enrolled = semester_enrolled
+        self._date_enrolled = date_enrolled
         self._status = status
 
     @classmethod
@@ -102,25 +102,25 @@ class Student(Model):
         self._name = name
 
     @property
-    def semester_enrolled(self) -> datetime:
-        """Gets the semester_enrolled of this Student.
+    def date_enrolled(self) -> datetime:
+        """Gets the date_enrolled of this Student.
 
 
-        :return: The semester_enrolled of this Student.
+        :return: The date_enrolled of this Student.
         :rtype: datetime
         """
-        return self._semester_enrolled
+        return self._date_enrolled
 
-    @semester_enrolled.setter
-    def semester_enrolled(self, semester_enrolled: datetime):
-        """Sets the semester_enrolled of this Student.
+    @date_enrolled.setter
+    def date_enrolled(self, date_enrolled: datetime):
+        """Sets the date_enrolled of this Student.
 
 
-        :param semester_enrolled: The semester_enrolled of this Student.
-        :type semester_enrolled: datetime
+        :param date_enrolled: The date_enrolled of this Student.
+        :type date_enrolled: datetime
         """
 
-        self._semester_enrolled = semester_enrolled
+        self._date_enrolled = date_enrolled
 
     @property
     def status(self) -> str:

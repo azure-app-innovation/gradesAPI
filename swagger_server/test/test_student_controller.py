@@ -22,7 +22,7 @@ class TestStudentController(BaseTestCase):
         query_string = [('buid', 'buid_example')]
         data = dict(university_id='university_id_example',
                     name='name_example',
-                    semester_enrolled='2013-10-20T19:20:30+01:00',
+                    date_enrolled='2013-10-20T19:20:30+01:00',
                     status='status_example')
         response = self.client.open(
             '/api/student',
@@ -94,7 +94,7 @@ class TestStudentController(BaseTestCase):
         query_string = [('buid', 'buid_example')]
         data = dict(university_id='university_id_example',
                     name='name_example',
-                    semester_enrolled='2013-10-20T19:20:30+01:00',
+                    date_enrolled='2013-10-20T19:20:30+01:00',
                     status='status_example')
         response = self.client.open(
             '/api/student/{studentId}'.format(student_id='student_id_example'),

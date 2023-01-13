@@ -5,34 +5,7 @@
 ./swagger_server/controllers/class_controller.py
 ===
 ./swagger_server/controllers/student_controller.py
-26c26
-< def add_student(university_id, name, semester_enrolled, status, buid):  # noqa: E501
----
-> def add_student(university_id, name, semister_enrolled, status, buid):  # noqa: E501
-35,36c35,36
-<     :param semester_enrolled: 
-<     :type semester_enrolled: str
----
->     :param semister_enrolled: 
->     :type semister_enrolled: str
-44c44
-<     semester_enrolled = util.deserialize_datetime(semester_enrolled)
----
->     semister_enrolled = util.deserialize_datetime(semister_enrolled)
-127c127
-< def update_student(university_id, name, semester_enrolled, status, buid, student_id):  # noqa: E501
----
-> def update_student(university_id, name, semister_enrolled, status, buid, student_id):  # noqa: E501
-136,137c136,137
-<     :param semester_enrolled: 
-<     :type semester_enrolled: str
----
->     :param semister_enrolled: 
->     :type semister_enrolled: str
-147c147
-<     semester_enrolled = util.deserialize_datetime(semester_enrolled)
----
->     semister_enrolled = util.deserialize_datetime(semister_enrolled)
+===
 ./swagger_server/controllers/__init__.py
 ===
 ./swagger_server/encoder.py
@@ -52,7 +25,14 @@
 ./swagger_server/test/test_class_controller.py
 ===
 ./swagger_server/test/test_student_controller.py
-===
+25c25
+<                     date_enrolled='2013-10-20T19:20:30+01:00',
+---
+>                     semester_enrolled='2013-10-20T19:20:30+01:00',
+97c97
+<                     date_enrolled='2013-10-20T19:20:30+01:00',
+---
+>                     semester_enrolled='2013-10-20T19:20:30+01:00',
 ./swagger_server/test/__init__.py
 ===
 ./swagger_server/type_util.py
