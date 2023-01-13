@@ -22,15 +22,15 @@ def list_assignments(buid, class_id):  # noqa: E501
     return 'do some magic!'
 
 
-def list_classes(buid, semister):  # noqa: E501
-    """Returns a list of classes offered by semister
+def list_classes(buid, semester):  # noqa: E501
+    """Returns a list of classes offered by semester
 
-    Returns a listing of classes offered by semister # noqa: E501
+    Returns a listing of classes offered by semester # noqa: E501
 
     :param buid: The caller&#x27;s BUID
     :type buid: str
-    :param semister: Filter the class list by this semister
-    :type semister: str
+    :param semester: Filter the class list by this semester
+    :type semester: str
 
     :rtype: List[ModelClass]
     """

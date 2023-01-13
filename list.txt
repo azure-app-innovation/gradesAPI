@@ -1,0 +1,100 @@
+./setup.py
+===
+./swagger_server/controllers/authorization_controller.py
+===
+./swagger_server/controllers/class_controller.py
+===
+./swagger_server/controllers/student_controller.py
+26c26
+< def add_student(university_id, name, semester_enrolled, status, buid):  # noqa: E501
+---
+> def add_student(university_id, name, semister_enrolled, status, buid):  # noqa: E501
+35,36c35,36
+<     :param semester_enrolled: 
+<     :type semester_enrolled: str
+---
+>     :param semister_enrolled: 
+>     :type semister_enrolled: str
+44c44
+<     semester_enrolled = util.deserialize_datetime(semester_enrolled)
+---
+>     semister_enrolled = util.deserialize_datetime(semister_enrolled)
+127c127
+< def update_student(university_id, name, semester_enrolled, status, buid, student_id):  # noqa: E501
+---
+> def update_student(university_id, name, semister_enrolled, status, buid, student_id):  # noqa: E501
+136,137c136,137
+<     :param semester_enrolled: 
+<     :type semester_enrolled: str
+---
+>     :param semister_enrolled: 
+>     :type semister_enrolled: str
+147c147
+<     semester_enrolled = util.deserialize_datetime(semester_enrolled)
+---
+>     semister_enrolled = util.deserialize_datetime(semister_enrolled)
+./swagger_server/controllers/__init__.py
+===
+./swagger_server/encoder.py
+===
+./swagger_server/models/assignment.py
+===
+./swagger_server/models/base_model_.py
+===
+./swagger_server/models/grade.py
+===
+./swagger_server/models/model_class.py
+===
+./swagger_server/models/student.py
+===
+./swagger_server/models/__init__.py
+===
+./swagger_server/test/test_class_controller.py
+===
+./swagger_server/test/test_student_controller.py
+===
+./swagger_server/test/__init__.py
+===
+./swagger_server/type_util.py
+===
+./swagger_server/util.py
+===
+./swagger_server/__init__.py
+0a1,17
+> #!/usr/bin/env python3
+> 
+> import connexion
+> 
+> from swagger_server import encoder
+> 
+> app = connexion.App(__name__, specification_dir='./swagger/')
+> 
+> app.app.json_encoder = encoder.JSONEncoder
+> app.add_api('swagger.yaml', arguments={'title': 'Swagger DS/CS 519 Assessment - OpenAPI 3.0'}, pythonic_params=True)
+> 
+> @app.route('/')
+> def starting_url():
+>     return "OK"
+> 
+> if __name__ == '__main__':
+>     app.run(port=8000)
+./swagger_server/__main__.py
+6a7
+> app = connexion.App(__name__, specification_dir='./swagger/')
+8,12c9,14
+< def main():
+<     app = connexion.App(__name__, specification_dir='./swagger/')
+<     app.app.json_encoder = encoder.JSONEncoder
+<     app.add_api('swagger.yaml', arguments={'title': 'Swagger DS/CS 519 Assessment - OpenAPI 3.0'}, pythonic_params=True)
+<     app.run(port=8080)
+---
+> app.app.json_encoder = encoder.JSONEncoder
+> app.add_api('swagger.yaml', arguments={'title': 'Swagger DS/CS 519 Assessment - OpenAPI 3.0'}, pythonic_params=True)
+> 
+> @app.route('/')
+> def starting_url():
+>     return "OK"
+16c18
+<     main()
+---
+>     app.run(port=8000)

@@ -25,7 +25,7 @@ class TestStudentController(BaseTestCase):
                     semester_enrolled='2013-10-20T19:20:30+01:00',
                     status='status_example')
         response = self.client.open(
-            '/api/v3/student',
+            '/api/student',
             method='POST',
             data=json.dumps(body),
             data=data,
@@ -41,7 +41,7 @@ class TestStudentController(BaseTestCase):
         """
         headers = [('api_key', 'api_key_example')]
         response = self.client.open(
-            '/api/v3/student/{studentId}'.format(student_id=789),
+            '/api/student/{studentId}'.format(student_id=789),
             method='DELETE',
             headers=headers)
         self.assert200(response,
@@ -55,7 +55,7 @@ class TestStudentController(BaseTestCase):
         query_string = [('buid', 'buid_example'),
                         ('status', 'enrolled')]
         response = self.client.open(
-            '/api/v3/student/findByStatus',
+            '/api/student/findByStatus',
             method='GET',
             query_string=query_string)
         self.assert200(response,
@@ -67,7 +67,7 @@ class TestStudentController(BaseTestCase):
         Find student by ID
         """
         response = self.client.open(
-            '/api/v3/student/{studentId}'.format(student_id=789),
+            '/api/student/{studentId}'.format(student_id=789),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -79,7 +79,7 @@ class TestStudentController(BaseTestCase):
         """
         query_string = [('buid', 'buid_example')]
         response = self.client.open(
-            '/api/v3/student/{studentId}/{classId}/listGrades'.format(student_id='student_id_example', class_id='class_id_example'),
+            '/api/student/{studentId}/{classId}/listGrades'.format(student_id='student_id_example', class_id='class_id_example'),
             method='POST',
             query_string=query_string)
         self.assert200(response,
@@ -97,7 +97,7 @@ class TestStudentController(BaseTestCase):
                     semester_enrolled='2013-10-20T19:20:30+01:00',
                     status='status_example')
         response = self.client.open(
-            '/api/v3/student/{studentId}'.format(student_id='student_id_example'),
+            '/api/student/{studentId}'.format(student_id='student_id_example'),
             method='PUT',
             data=json.dumps(body),
             data=data,
@@ -114,7 +114,7 @@ class TestStudentController(BaseTestCase):
         query_string = [('name', 'name_example'),
                         ('status', 'status_example')]
         response = self.client.open(
-            '/api/v3/student/{studentId}'.format(student_id=789),
+            '/api/student/{studentId}'.format(student_id=789),
             method='POST',
             query_string=query_string)
         self.assert200(response,

@@ -15,7 +15,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-- url: https://petstore3.swagger.io/api/v3
+- url: https://dscs519-assessment.azurewebsites.net/api
 tags:
 - name: Grading API
   description: This API can be used to perform operations on student grades
@@ -66,9 +66,7 @@ paths:
         "405":
           description: Invalid input
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
+      - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
   /student/findByStatus:
     get:
@@ -117,9 +115,7 @@ paths:
         "400":
           description: Invalid status value
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
+      - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
   /student/{studentId}:
     get:
@@ -154,9 +150,6 @@ paths:
           description: Pet not found
       security:
       - api_key: []
-      - petstore_auth:
-        - write:pets
-        - read:pets
       x-openapi-router-controller: swagger_server.controllers.student_controller
     put:
       tags:
@@ -211,9 +204,7 @@ paths:
         "405":
           description: Validation exception
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
+      - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
     post:
       tags:
@@ -251,9 +242,7 @@ paths:
         "405":
           description: Invalid input
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
+      - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
     delete:
       tags:
@@ -283,9 +272,7 @@ paths:
         "400":
           description: Invalid studentID value
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
+      - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
   /student/{studentId}/{classId}/listGrades:
     post:
@@ -329,16 +316,14 @@ paths:
                   $ref: '#/components/schemas/Grade'
                 x-content-type: application/json
       security:
-      - petstore_auth:
-        - write:pets
-        - read:pets
+      - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
-  /class/listBySemister:
+  /class/listBySemester:
     get:
       tags:
       - class
-      summary: Returns a list of classes offered by semister
-      description: Returns a listing of classes offered by semister
+      summary: Returns a list of classes offered by semester
+      description: Returns a listing of classes offered by semester
       operationId: list_classes
       parameters:
       - name: buid
@@ -349,9 +334,9 @@ paths:
         explode: true
         schema:
           type: string
-      - name: semister
+      - name: semester
         in: query
-        description: Filter the class list by this semister
+        description: Filter the class list by this semester
         required: true
         style: form
         explode: true
@@ -455,6 +440,8 @@ paths:
                 x-content-type: application/json
         "405":
           description: Invalid input
+      security:
+      - api_key: []
       x-openapi-router-controller: swagger_server.controllers.class_controller
 components:
   schemas:
@@ -589,19 +576,9 @@ components:
             items:
               $ref: '#/components/schemas/Assignment'
   securitySchemes:
-    petstore_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
-          scopes:
-            write:pets: modify pets in your account
-            read:pets: read your pets
-      x-tokenInfoFunc: swagger_server.controllers.authorization_controller.check_petstore_auth
-      x-scopeValidateFunc: swagger_server.controllers.authorization_controller.validate_scope_petstore_auth
     api_key:
       type: apiKey
-      name: api_key
+      name: x-functions-key
       in: header
       x-apikeyInfoFunc: swagger_server.controllers.authorization_controller.check_api_key
 

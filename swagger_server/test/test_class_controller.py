@@ -21,7 +21,7 @@ class TestClassController(BaseTestCase):
         """
         query_string = [('buid', 'buid_example')]
         response = self.client.open(
-            '/api/v3/class/{classId}/ListAssignments'.format(class_id=789),
+            '/api/class/{classId}/ListAssignments'.format(class_id=789),
             method='GET',
             query_string=query_string)
         self.assert200(response,
@@ -30,12 +30,12 @@ class TestClassController(BaseTestCase):
     def test_list_classes(self):
         """Test case for list_classes
 
-        Returns a list of classes offered by semister
+        Returns a list of classes offered by semester
         """
         query_string = [('buid', 'buid_example'),
-                        ('semister', 'fall2022')]
+                        ('semester', 'fall2022')]
         response = self.client.open(
-            '/api/v3/class/listBySemister',
+            '/api/class/listBySemester',
             method='GET',
             query_string=query_string)
         self.assert200(response,
@@ -48,7 +48,7 @@ class TestClassController(BaseTestCase):
         """
         query_string = [('buid', 'buid_example')]
         response = self.client.open(
-            '/api/v3/class/{classId}/listStudents'.format(class_id='class_id_example'),
+            '/api/class/{classId}/listStudents'.format(class_id='class_id_example'),
             method='GET',
             query_string=query_string)
         self.assert200(response,
