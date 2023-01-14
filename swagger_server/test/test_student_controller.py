@@ -52,10 +52,9 @@ class TestStudentController(BaseTestCase):
 
         Finds Students by status
         """
-        query_string = [('buid', 'buid_example'),
-                        ('status', 'enrolled')]
+        query_string = [('buid', 'buid_example')]
         response = self.client.open(
-            '/api/student/findByStatus',
+            '/api/student/{status}/findByStatus'.format(status='status_example'),
             method='GET',
             query_string=query_string)
         self.assert200(response,

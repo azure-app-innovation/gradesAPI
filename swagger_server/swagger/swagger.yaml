@@ -15,18 +15,16 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: "https://dscs519-assessment.azurewebsites.net/api"
+- url: https://dscs519-assessment.azurewebsites.net/api
 tags:
-  - name: Grading API
-    description: This API can be used to perform operations on student grades
-  - name: student
-    description: Access to Students
-  - name: class
-    description: Access to Classes
+- name: Grading API
+  description: This API can be used to perform operations on student grades
+- name: student
+  description: Access to Students
+- name: class
+  description: Access to Classes
 paths:
   /student:
-    servers:
-      - url: "https://dscs519-assessment.azurewebsites.net/api"
     post:
       tags:
       - student
@@ -65,14 +63,14 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Student'
-        "405":
-          description: Invalid input
+        "400":
+          description: invalid parameters were provided
       security:
       - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
-  /student/findByStatus:
     servers:
-      - url: "https://dscs519-assessment.azurewebsites.net/api"
+    - url: https://dscs519-assessment.azurewebsites.net/api
+  /student/{status}/findByStatus:
     get:
       tags:
       - student
@@ -89,10 +87,10 @@ paths:
         schema:
           type: string
       - name: status
-        in: query
+        in: path
         description: Status values that need to be considered for filter
-        required: false
-        style: form
+        required: true
+        style: simple
         explode: true
         schema:
           type: string
@@ -121,9 +119,9 @@ paths:
       security:
       - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
-  /student/{studentId}:
     servers:
-      - url: "https://dscs519-assessment.azurewebsites.net/api"
+    - url: https://dscs519-assessment.azurewebsites.net/api
+  /student/{studentId}:
     get:
       tags:
       - student
@@ -280,9 +278,9 @@ paths:
       security:
       - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
-  /student/{studentId}/{classId}/listGrades:
     servers:
-      - url: "https://dscs519-assessment.azurewebsites.net/api"
+    - url: https://dscs519-assessment.azurewebsites.net/api
+  /student/{studentId}/{classId}/listGrades:
     post:
       tags:
       - student
@@ -326,9 +324,9 @@ paths:
       security:
       - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
-  /class/listBySemester:
     servers:
-      - url: "https://dscs519-assessment.azurewebsites.net/api"
+    - url: https://dscs519-assessment.azurewebsites.net/api
+  /class/listBySemester:
     get:
       tags:
       - class
@@ -370,9 +368,9 @@ paths:
       security:
       - api_key: []
       x-openapi-router-controller: swagger_server.controllers.class_controller
-  /class/{classId}/listStudents:
     servers:
-      - url: "https://dscs519-assessment.azurewebsites.net/api"
+    - url: https://dscs519-assessment.azurewebsites.net/api
+  /class/{classId}/listStudents:
     get:
       tags:
       - class
@@ -415,9 +413,9 @@ paths:
       security:
       - api_key: []
       x-openapi-router-controller: swagger_server.controllers.class_controller
-  /class/{classId}/ListAssignments:
     servers:
-      - url: "https://dscs519-assessment.azurewebsites.net/api"
+    - url: https://dscs519-assessment.azurewebsites.net/api
+  /class/{classId}/ListAssignments:
     get:
       tags:
       - class
@@ -457,6 +455,8 @@ paths:
       security:
       - api_key: []
       x-openapi-router-controller: swagger_server.controllers.class_controller
+    servers:
+    - url: https://dscs519-assessment.azurewebsites.net/api
 components:
   schemas:
     Grade:

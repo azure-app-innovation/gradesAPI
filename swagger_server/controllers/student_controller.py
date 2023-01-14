@@ -60,7 +60,7 @@ def delete_student(student_id, api_key=None):  # noqa: E501
     return 'do some magic!'
 
 
-def find_students_by_status(buid, status=None):  # noqa: E501
+def find_students_by_status(buid, status):  # noqa: E501
     """Finds Students by status
 
     Multiple status values can be provided with comma separated strings # noqa: E501
