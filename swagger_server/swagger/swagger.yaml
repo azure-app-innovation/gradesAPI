@@ -70,7 +70,7 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.student_controller
     servers:
     - url: https://dscs519-assessment.azurewebsites.net/api
-  /student/{status}/findByStatus:
+  /student/findByStatus/{status}:
     get:
       tags:
       - student
@@ -280,7 +280,7 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.student_controller
     servers:
     - url: https://dscs519-assessment.azurewebsites.net/api
-  /student/{studentId}/{classId}/listGrades:
+  /student/listGrades/{studentId}/{classId}/:
     post:
       tags:
       - student
@@ -326,7 +326,53 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.student_controller
     servers:
     - url: https://dscs519-assessment.azurewebsites.net/api
-  /class/listBySemester:
+  /class:
+    post:
+      tags:
+      - class
+      summary: create a new class to the university
+      description: Adds a new class to the university
+      operationId: add_class
+      parameters:
+      - name: buid
+        in: query
+        description: The caller's BUID
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      requestBody:
+        description: Create a new class in the university
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Class'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Class'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Class'
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Class'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Class'
+        "400":
+          description: invalid parameters were provided
+      security:
+      - api_key: []
+      x-openapi-router-controller: swagger_server.controllers.class_controller
+    servers:
+    - url: https://dscs519-assessment.azurewebsites.net/api
+  /class/listBySemester/{semester}:
     get:
       tags:
       - class
@@ -343,10 +389,10 @@ paths:
         schema:
           type: string
       - name: semester
-        in: query
+        in: path
         description: Filter the class list by this semester
         required: true
-        style: form
+        style: simple
         explode: true
         schema:
           type: string
@@ -370,7 +416,7 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.class_controller
     servers:
     - url: https://dscs519-assessment.azurewebsites.net/api
-  /class/{classId}/listStudents:
+  /class/listStudents/{classId}:
     get:
       tags:
       - class
@@ -415,7 +461,7 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.class_controller
     servers:
     - url: https://dscs519-assessment.azurewebsites.net/api
-  /class/{classId}/ListAssignments:
+  /class/ListAssignments/{classId}:
     get:
       tags:
       - class
@@ -528,10 +574,18 @@ components:
           enum:
           - active
           - inactive
+        semester:
+          type: string
+          example: fall2022
+          enum:
+          - fall2022
+          - spring2023
+          - summer2023
       example:
         meetingTime: TR 1700-1830
         classId: C123456
         description: Introduction to software methodology
+        semester: fall2022
         meetingLocation: B52
         title: DS 519
         status: active

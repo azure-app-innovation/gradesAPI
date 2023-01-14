@@ -7,6 +7,50 @@ from swagger_server.models.student import Student  # noqa: E501
 from swagger_server import util
 
 
+def add_class(body, buid):  # noqa: E501
+    """create a new class to the university
+
+    Adds a new class to the university # noqa: E501
+
+    :param body: Create a new class in the university
+    :type body: dict | bytes
+    :param buid: The caller&#x27;s BUID
+    :type buid: str
+
+    :rtype: ModelClass
+    """
+    if connexion.request.is_json:
+        body = ModelClass.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def add_class(class_id, title, description, meeting_time, meeting_location, status, semester, buid):  # noqa: E501
+    """create a new class to the university
+
+    Adds a new class to the university # noqa: E501
+
+    :param class_id: 
+    :type class_id: str
+    :param title: 
+    :type title: str
+    :param description: 
+    :type description: str
+    :param meeting_time: 
+    :type meeting_time: str
+    :param meeting_location: 
+    :type meeting_location: str
+    :param status: 
+    :type status: str
+    :param semester: 
+    :type semester: str
+    :param buid: The caller&#x27;s BUID
+    :type buid: str
+
+    :rtype: ModelClass
+    """
+    return 'do some magic!'
+
+
 def list_assignments(buid, class_id):  # noqa: E501
     """Lists assignments for the class
 

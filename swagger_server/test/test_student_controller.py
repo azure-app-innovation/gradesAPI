@@ -54,7 +54,7 @@ class TestStudentController(BaseTestCase):
         """
         query_string = [('buid', 'buid_example')]
         response = self.client.open(
-            '/api/student/{status}/findByStatus'.format(status='status_example'),
+            '/api/student/findByStatus/{status}'.format(status='status_example'),
             method='GET',
             query_string=query_string)
         self.assert200(response,
@@ -78,7 +78,7 @@ class TestStudentController(BaseTestCase):
         """
         query_string = [('buid', 'buid_example')]
         response = self.client.open(
-            '/api/student/{studentId}/{classId}/listGrades'.format(student_id='student_id_example', class_id='class_id_example'),
+            '/api/student/listGrades/{studentId}/{classId}/'.format(student_id='student_id_example', class_id='class_id_example'),
             method='POST',
             query_string=query_string)
         self.assert200(response,

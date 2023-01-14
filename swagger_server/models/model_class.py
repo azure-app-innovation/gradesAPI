@@ -14,7 +14,7 @@ class ModelClass(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, class_id: str=None, title: str=None, description: str=None, meeting_time: str=None, meeting_location: str=None, status: str=None):  # noqa: E501
+    def __init__(self, class_id: str=None, title: str=None, description: str=None, meeting_time: str=None, meeting_location: str=None, status: str=None, semester: str=None):  # noqa: E501
         """ModelClass - a model defined in Swagger
 
         :param class_id: The class_id of this ModelClass.  # noqa: E501
@@ -29,6 +29,8 @@ class ModelClass(Model):
         :type meeting_location: str
         :param status: The status of this ModelClass.  # noqa: E501
         :type status: str
+        :param semester: The semester of this ModelClass.  # noqa: E501
+        :type semester: str
         """
         self.swagger_types = {
             'class_id': str,
@@ -36,7 +38,8 @@ class ModelClass(Model):
             'description': str,
             'meeting_time': str,
             'meeting_location': str,
-            'status': str
+            'status': str,
+            'semester': str
         }
 
         self.attribute_map = {
@@ -45,7 +48,8 @@ class ModelClass(Model):
             'description': 'description',
             'meeting_time': 'meetingTime',
             'meeting_location': 'meetingLocation',
-            'status': 'status'
+            'status': 'status',
+            'semester': 'semester'
         }
         self._class_id = class_id
         self._title = title
@@ -53,6 +57,7 @@ class ModelClass(Model):
         self._meeting_time = meeting_time
         self._meeting_location = meeting_location
         self._status = status
+        self._semester = semester
 
     @classmethod
     def from_dict(cls, dikt) -> 'ModelClass':
@@ -196,3 +201,30 @@ class ModelClass(Model):
             )
 
         self._status = status
+
+    @property
+    def semester(self) -> str:
+        """Gets the semester of this ModelClass.
+
+
+        :return: The semester of this ModelClass.
+        :rtype: str
+        """
+        return self._semester
+
+    @semester.setter
+    def semester(self, semester: str):
+        """Sets the semester of this ModelClass.
+
+
+        :param semester: The semester of this ModelClass.
+        :type semester: str
+        """
+        allowed_values = ["fall2022", "spring2023", "summer2023"]  # noqa: E501
+        if semester not in allowed_values:
+            raise ValueError(
+                "Invalid value for `semester` ({0}), must be one of {1}"
+                .format(semester, allowed_values)
+            )
+
+        self._semester = semester
