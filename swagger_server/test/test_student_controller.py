@@ -5,7 +5,7 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.grade import Grade  # noqa: E501
+from swagger_server.models.grades import Grades  # noqa: E501
 from swagger_server.models.student import Student  # noqa: E501
 from swagger_server.test import BaseTestCase
 
@@ -66,7 +66,7 @@ class TestStudentController(BaseTestCase):
         Find student by ID
         """
         response = self.client.open(
-            '/api/student/{studentId}'.format(student_id=789),
+            '/api/student/GetById/{studentId}'.format(student_id=789),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -79,7 +79,7 @@ class TestStudentController(BaseTestCase):
         query_string = [('buid', 'buid_example')]
         response = self.client.open(
             '/api/student/listGrades/{studentId}/{classId}/'.format(student_id='student_id_example', class_id='class_id_example'),
-            method='POST',
+            method='GET',
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

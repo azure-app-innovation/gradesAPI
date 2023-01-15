@@ -70,91 +70,7 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.student_controller
     servers:
     - url: https://dscs519-assessment.azurewebsites.net/api
-  /student/findByStatus/{status}:
-    get:
-      tags:
-      - student
-      summary: Finds Students by status
-      description: Multiple status values can be provided with comma separated strings
-      operationId: find_students_by_status
-      parameters:
-      - name: buid
-        in: query
-        description: The caller's BUID
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: status
-        in: path
-        description: Status values that need to be considered for filter
-        required: true
-        style: simple
-        explode: true
-        schema:
-          type: string
-          enum:
-          - enrolled
-          - graduated
-          - unenrolled
-          default: enrolled
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Student'
-                x-content-type: application/json
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Student'
-        "400":
-          description: Invalid status value
-      security:
-      - api_key: []
-      x-openapi-router-controller: swagger_server.controllers.student_controller
-    servers:
-    - url: https://dscs519-assessment.azurewebsites.net/api
   /student/{studentId}:
-    get:
-      tags:
-      - student
-      summary: Find student by ID
-      description: Returns a single student
-      operationId: get_student_by_id
-      parameters:
-      - name: studentId
-        in: path
-        description: ID of student to return
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-          format: int64
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Student'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Student'
-        "400":
-          description: Invalid ID supplied
-        "404":
-          description: Pet not found
-      security:
-      - api_key: []
-      x-openapi-router-controller: swagger_server.controllers.student_controller
     put:
       tags:
       - student
@@ -281,7 +197,7 @@ paths:
     servers:
     - url: https://dscs519-assessment.azurewebsites.net/api
   /student/listGrades/{studentId}/{classId}/:
-    post:
+    get:
       tags:
       - student
       summary: Lists student grades in a class
@@ -313,14 +229,101 @@ paths:
           type: string
       responses:
         "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grades'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Grades'
+      security:
+      - api_key: []
+      x-openapi-router-controller: swagger_server.controllers.student_controller
+    servers:
+    - url: https://dscs519-assessment.azurewebsites.net/api
+  /student/findByStatus/{status}:
+    get:
+      tags:
+      - student
+      summary: Finds Students by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: find_students_by_status
+      parameters:
+      - name: buid
+        in: query
+        description: The caller's BUID
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: status
+        in: path
+        description: Status values that need to be considered for filter
+        required: true
+        style: simple
+        explode: true
+        schema:
+          type: string
+          enum:
+          - enrolled
+          - graduated
+          - unenrolled
+          default: enrolled
+      responses:
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Grade'
+                  $ref: '#/components/schemas/Student'
                 x-content-type: application/json
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        "400":
+          description: Invalid status value
+      security:
+      - api_key: []
+      x-openapi-router-controller: swagger_server.controllers.student_controller
+    servers:
+    - url: https://dscs519-assessment.azurewebsites.net/api
+  /student/GetById/{studentId}:
+    get:
+      tags:
+      - student
+      summary: Find student by ID
+      description: Returns a single student
+      operationId: get_student_by_id
+      parameters:
+      - name: studentId
+        in: path
+        description: ID of student to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Pet not found
       security:
       - api_key: []
       x-openapi-router-controller: swagger_server.controllers.student_controller
@@ -523,12 +526,6 @@ components:
           example: 76
         complete:
           type: boolean
-      example:
-        studentId: U123456
-        gradeId: G1234556
-        complete: true
-        assignmentId: A198772
-        value: 76
       xml:
         name: order
     Assignment:
@@ -620,6 +617,41 @@ components:
         status: enrolled
       xml:
         name: pet
+    Grades:
+      type: object
+      properties:
+        classId:
+          type: string
+          example: C123
+        studentId:
+          type: string
+          example: S123
+        grades:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+            example:
+              A1: 76
+              A2: 88
+              A3: 94
+              A4: 93
+              A5: 88
+      example:
+        studentId: S123
+        classId: C123
+        grades:
+        - A1: 76
+          A2: 88
+          A3: 94
+          A4: 93
+          A5: 88
+        - A1: 76
+          A2: 88
+          A3: 94
+          A4: 93
+          A5: 88
   requestBodies:
     Student:
       description: Student object that needs to be added to the system

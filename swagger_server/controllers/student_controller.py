@@ -1,7 +1,7 @@
 import connexion
 import six
 
-from swagger_server.models.grade import Grade  # noqa: E501
+from swagger_server.models.grades import Grades  # noqa: E501
 from swagger_server.models.student import Student  # noqa: E501
 from swagger_server import util
 
@@ -100,7 +100,7 @@ def list_grades(buid, student_id, class_id):  # noqa: E501
     :param class_id: 
     :type class_id: str
 
-    :rtype: List[Grade]
+    :rtype: Grades
     """
     return 'do some magic!'
 
