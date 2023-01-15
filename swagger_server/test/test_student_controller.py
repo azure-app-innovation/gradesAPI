@@ -66,7 +66,7 @@ class TestStudentController(BaseTestCase):
         Find student by ID
         """
         response = self.client.open(
-            '/api/student/GetById/{studentId}'.format(student_id=789),
+            '/api/student/{studentId}'.format(student_id=789),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
