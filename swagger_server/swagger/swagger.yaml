@@ -462,7 +462,7 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.class_controller
     servers:
     - url: https://dscs519-assessment.azurewebsites.net/api
-  /class/ListAssignments/{classId}:
+  /class/listAssignments/{classId}:
     get:
       tags:
       - class
