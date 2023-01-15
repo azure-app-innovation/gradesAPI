@@ -14,11 +14,13 @@ class Assignment(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, assignment_id: str=None, _date: datetime=None, weight: int=None):  # noqa: E501
+    def __init__(self, assignment_id: str=None, class_id: str=None, _date: datetime=None, weight: int=None):  # noqa: E501
         """Assignment - a model defined in Swagger
 
         :param assignment_id: The assignment_id of this Assignment.  # noqa: E501
         :type assignment_id: str
+        :param class_id: The class_id of this Assignment.  # noqa: E501
+        :type class_id: str
         :param _date: The _date of this Assignment.  # noqa: E501
         :type _date: datetime
         :param weight: The weight of this Assignment.  # noqa: E501
@@ -26,16 +28,19 @@ class Assignment(Model):
         """
         self.swagger_types = {
             'assignment_id': str,
+            'class_id': str,
             '_date': datetime,
             'weight': int
         }
 
         self.attribute_map = {
             'assignment_id': 'assignmentId',
+            'class_id': 'classId',
             '_date': 'date',
             'weight': 'weight'
         }
         self._assignment_id = assignment_id
+        self._class_id = class_id
         self.__date = _date
         self._weight = weight
 
@@ -70,6 +75,27 @@ class Assignment(Model):
         """
 
         self._assignment_id = assignment_id
+
+    @property
+    def class_id(self) -> str:
+        """Gets the class_id of this Assignment.
+
+
+        :return: The class_id of this Assignment.
+        :rtype: str
+        """
+        return self._class_id
+
+    @class_id.setter
+    def class_id(self, class_id: str):
+        """Sets the class_id of this Assignment.
+
+
+        :param class_id: The class_id of this Assignment.
+        :type class_id: str
+        """
+
+        self._class_id = class_id
 
     @property
     def _date(self) -> datetime:

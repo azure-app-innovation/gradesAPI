@@ -532,6 +532,9 @@ components:
         assignmentId:
           type: string
           example: A123456
+        classId:
+          type: string
+          example: C123456
         date:
           type: string
           format: date-time
@@ -541,6 +544,7 @@ components:
           example: 90
       example:
         date: 2000-01-23T04:56:07.000+00:00
+        classId: C123456
         weight: 90
         assignmentId: A123456
       xml:
