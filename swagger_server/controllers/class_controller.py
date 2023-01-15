@@ -3,7 +3,6 @@ import six
 
 from swagger_server.models.assignment import Assignment  # noqa: E501
 from swagger_server.models.model_class import ModelClass  # noqa: E501
-from swagger_server.models.student import Student  # noqa: E501
 from swagger_server import util
 
 
@@ -91,6 +90,6 @@ def list_students(buid, class_id):  # noqa: E501
     :param class_id: Filter the student list by this classID
     :type class_id: str
 
-    :rtype: List[Student]
+    :rtype: List[str]
     """
     return 'do some magic!'

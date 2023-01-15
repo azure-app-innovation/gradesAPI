@@ -451,14 +451,12 @@ paths:
             application/json:
               schema:
                 type: array
+                example:
+                - S123
+                - S234
                 items:
-                  $ref: '#/components/schemas/Student'
+                  type: string
                 x-content-type: application/json
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Student'
       security:
       - api_key: []
       x-openapi-router-controller: swagger_server.controllers.class_controller
