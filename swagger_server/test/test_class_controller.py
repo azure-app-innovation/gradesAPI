@@ -44,7 +44,7 @@ class TestClassController(BaseTestCase):
         """
         query_string = [('buid', 'buid_example')]
         response = self.client.open(
-            '/api/class/listAssignments/{classId}'.format(class_id=789),
+            '/api/class/listAssignments/{classId}'.format(class_id='class_id_example'),
             method='GET',
             query_string=query_string)
         self.assert200(response,

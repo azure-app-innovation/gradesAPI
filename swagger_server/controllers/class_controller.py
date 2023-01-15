@@ -58,7 +58,7 @@ def list_assignments(buid, class_id):  # noqa: E501
     :param buid: The caller&#x27;s BUID
     :type buid: str
     :param class_id: List assignments for the class with this classID
-    :type class_id: int
+    :type class_id: str
 
     :rtype: List[Assignment]
     """
