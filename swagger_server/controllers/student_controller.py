@@ -75,13 +75,15 @@ def find_students_by_status(buid, status):  # noqa: E501
     return 'do some magic!'
 
 
-def get_student_by_id(student_id):  # noqa: E501
+def get_student_by_id(buid, student_id):  # noqa: E501
     """Find student by ID
 
     Returns a single student # noqa: E501
 
+    :param buid: The caller&#x27;s BUID
+    :type buid: str
     :param student_id: ID of student to return
-    :type student_id: int
+    :type student_id: str
 
     :rtype: Student
     """

@@ -301,6 +301,14 @@ paths:
       description: Returns a single student
       operationId: get_student_by_id
       parameters:
+      - name: buid
+        in: query
+        description: The caller's BUID
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
       - name: studentId
         in: path
         description: ID of student to return
@@ -308,8 +316,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          type: string
       responses:
         "200":
           description: successful operation
