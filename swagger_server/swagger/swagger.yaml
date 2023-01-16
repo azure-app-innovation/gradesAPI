@@ -512,26 +512,6 @@ paths:
     - url: https://dscs519-assessment.azurewebsites.net/api
 components:
   schemas:
-    Grade:
-      type: object
-      properties:
-        gradeId:
-          type: string
-          example: G1234556
-        assignmentId:
-          type: string
-          example: A198772
-        studentId:
-          type: string
-          example: U123456
-        value:
-          type: integer
-          format: int64
-          example: 76
-        complete:
-          type: boolean
-      xml:
-        name: order
     Assignment:
       type: object
       properties:
@@ -634,6 +614,9 @@ components:
         studentId:
           type: string
           example: S123
+        name:
+          type: string
+          example: Andrew F. Rosas
         grades:
           type: array
           items:
@@ -649,6 +632,7 @@ components:
       example:
         studentId: S123
         classId: C123
+        name: Andrew F. Rosas
         grades:
         - A1: 76
           A2: 88
