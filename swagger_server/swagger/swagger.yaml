@@ -29,7 +29,8 @@ paths:
       tags:
       - student
       summary: Enroll a new student to the university
-      description: Adds a new student to the university
+      description: Adds a new student to the university.  This is a privileged operation
+        and needs an admin token.
       operationId: add_student
       parameters:
       - name: buid
@@ -341,7 +342,8 @@ paths:
       tags:
       - class
       summary: create a new class to the university
-      description: Adds a new class to the university
+      description: Adds a new class to the university.  This is a privileged operation
+        and needs an admin token.
       operationId: add_class
       parameters:
       - name: buid
@@ -386,8 +388,8 @@ paths:
     get:
       tags:
       - class
-      summary: Find student by ID
-      description: Returns a single student
+      summary: Find class by ID
+      description: Returns a single class
       operationId: get_class_by_id
       parameters:
       - name: buid
@@ -400,7 +402,7 @@ paths:
           type: string
       - name: classId
         in: path
-        description: ID of student to return
+        description: ID of class to return
         required: true
         style: simple
         explode: false
