@@ -3,7 +3,6 @@ import six
 
 from swagger_server.models.assignment import Assignment  # noqa: E501
 from swagger_server.models.model_class import ModelClass  # noqa: E501
-from swagger_server.models.student import Student  # noqa: E501
 from swagger_server import util
 
 
@@ -61,7 +60,7 @@ def get_class_by_id(buid, class_id):  # noqa: E501
     :param class_id: ID of student to return
     :type class_id: str
 
-    :rtype: Student
+    :rtype: ModelClass
     """
     return 'do some magic!'
 

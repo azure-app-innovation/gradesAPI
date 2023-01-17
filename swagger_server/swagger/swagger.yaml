@@ -412,10 +412,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Student'
+                $ref: '#/components/schemas/Class'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Student'
+                $ref: '#/components/schemas/Class'
         "400":
           description: Invalid ID supplied
         "404":
