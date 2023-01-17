@@ -7,6 +7,7 @@ from six import BytesIO
 
 from swagger_server.models.assignment import Assignment  # noqa: E501
 from swagger_server.models.model_class import ModelClass  # noqa: E501
+from swagger_server.models.student import Student  # noqa: E501
 from swagger_server.test import BaseTestCase
 
 
@@ -33,6 +34,19 @@ class TestClassController(BaseTestCase):
             data=json.dumps(body),
             data=data,
             content_type='application/json',
+            query_string=query_string)
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_get_class_by_id(self):
+        """Test case for get_class_by_id
+
+        Find student by ID
+        """
+        query_string = [('buid', 'buid_example')]
+        response = self.client.open(
+            '/api/class/GetById/{classId}'.format(class_id='class_id_example'),
+            method='GET',
             query_string=query_string)
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

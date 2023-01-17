@@ -14,7 +14,7 @@ class Grades(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, class_id: str=None, student_id: str=None, name: str=None, grades: List[Dict[str, str]]=None):  # noqa: E501
+    def __init__(self, class_id: str=None, student_id: str=None, name: str=None, grades: Dict[str, str]=None):  # noqa: E501
         """Grades - a model defined in Swagger
 
         :param class_id: The class_id of this Grades.  # noqa: E501
@@ -24,13 +24,13 @@ class Grades(Model):
         :param name: The name of this Grades.  # noqa: E501
         :type name: str
         :param grades: The grades of this Grades.  # noqa: E501
-        :type grades: List[Dict[str, str]]
+        :type grades: Dict[str, str]
         """
         self.swagger_types = {
             'class_id': str,
             'student_id': str,
             'name': str,
-            'grades': List[Dict[str, str]]
+            'grades': Dict[str, str]
         }
 
         self.attribute_map = {
@@ -119,22 +119,22 @@ class Grades(Model):
         self._name = name
 
     @property
-    def grades(self) -> List[Dict[str, str]]:
+    def grades(self) -> Dict[str, str]:
         """Gets the grades of this Grades.
 
 
         :return: The grades of this Grades.
-        :rtype: List[Dict[str, str]]
+        :rtype: Dict[str, str]
         """
         return self._grades
 
     @grades.setter
-    def grades(self, grades: List[Dict[str, str]]):
+    def grades(self, grades: Dict[str, str]):
         """Sets the grades of this Grades.
 
 
         :param grades: The grades of this Grades.
-        :type grades: List[Dict[str, str]]
+        :type grades: Dict[str, str]
         """
 
         self._grades = grades

@@ -3,6 +3,7 @@ import six
 
 from swagger_server.models.assignment import Assignment  # noqa: E501
 from swagger_server.models.model_class import ModelClass  # noqa: E501
+from swagger_server.models.student import Student  # noqa: E501
 from swagger_server import util
 
 
@@ -46,6 +47,21 @@ def add_class(class_id, title, description, meeting_time, meeting_location, stat
     :type buid: str
 
     :rtype: ModelClass
+    """
+    return 'do some magic!'
+
+
+def get_class_by_id(buid, class_id):  # noqa: E501
+    """Find student by ID
+
+    Returns a single student # noqa: E501
+
+    :param buid: The caller&#x27;s BUID
+    :type buid: str
+    :param class_id: ID of student to return
+    :type class_id: str
+
+    :rtype: Student
     """
     return 'do some magic!'
 

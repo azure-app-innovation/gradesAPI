@@ -382,6 +382,49 @@ paths:
       x-openapi-router-controller: swagger_server.controllers.class_controller
     servers:
     - url: https://dscs519-assessment.azurewebsites.net/api
+  /class/GetById/{classId}:
+    get:
+      tags:
+      - class
+      summary: Find student by ID
+      description: Returns a single student
+      operationId: get_class_by_id
+      parameters:
+      - name: buid
+        in: query
+        description: The caller's BUID
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: classId
+        in: path
+        description: ID of student to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Student'
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Pet not found
+      security:
+      - api_key: []
+      x-openapi-router-controller: swagger_server.controllers.class_controller
+    servers:
+    - url: https://dscs519-assessment.azurewebsites.net/api
   /class/listBySemester/{semester}:
     get:
       tags:
@@ -618,28 +661,21 @@ components:
           type: string
           example: Andrew F. Rosas
         grades:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: string
-            example:
-              A1: 76
-              A2: 88
-              A3: 94
-              A4: 93
-              A5: 88
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            A1: 76
+            A2: 88
+            A3: 94
+            A4: 93
+            A5: 88
       example:
         studentId: S123
         classId: C123
         name: Andrew F. Rosas
         grades:
-        - A1: 76
-          A2: 88
-          A3: 94
-          A4: 93
-          A5: 88
-        - A1: 76
+          A1: 76
           A2: 88
           A3: 94
           A4: 93
