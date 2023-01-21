@@ -1,9 +1,10 @@
 openapi: 3.0.3
 info:
   title: Swagger DS/CS 519 Assessment - OpenAPI 3.0
-  description: "This is the grading API for the course assessment. \n\nSome useful\
-    \ links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n\
-    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)"
+  description: "This is the grading API for the course assessment.\n\n**Description:**\
+    \ This document describes the grading API for the course assessment. \n\nPlease\
+    \ note that all requests **must** include your BU ID number in the request. \n\
+    \n"
   termsOfService: http://swagger.io/terms/
   contact:
     email: nagendra@bu.edu
@@ -76,7 +77,8 @@ paths:
       tags:
       - student
       summary: Update an existing student
-      description: Update an existing student by Id
+      description: Update an existing student by Id. This is a privileged operation
+        and needs an admin token.
       operationId: update_student
       parameters:
       - name: buid
@@ -96,7 +98,7 @@ paths:
         schema:
           type: string
       requestBody:
-        description: Update an existent student enrolled in the university
+        description: Update an existent student enrolled in the university.
         content:
           application/json:
             schema:
@@ -130,8 +132,8 @@ paths:
     post:
       tags:
       - student
-      summary: Updates a student in the university with form data
-      description: ""
+      summary: Updates a student in the university with form data.
+      description: This is a privileged operation and needs an admin token.
       operationId: update_student_with_form
       parameters:
       - name: studentId
@@ -202,7 +204,7 @@ paths:
       tags:
       - student
       summary: Lists student grades in a class
-      description: Lists student grades in a class
+      description: List student grades in a particular class.
       operationId: list_grades
       parameters:
       - name: buid
@@ -299,7 +301,7 @@ paths:
       tags:
       - student
       summary: Find student by ID
-      description: Returns a single student
+      description: Returns a single student by ID
       operationId: get_student_by_id
       parameters:
       - name: buid
@@ -389,7 +391,9 @@ paths:
       tags:
       - class
       summary: Find class by ID
-      description: Returns a single class
+      description: Retrieve a single Class by it's ID number. This returns the same
+        data as `/class/listBySemester` but returns only a single Class instead of
+        multiple.
       operationId: get_class_by_id
       parameters:
       - name: buid
@@ -432,7 +436,8 @@ paths:
       tags:
       - class
       summary: Returns a list of classes offered by semester
-      description: Returns a listing of classes offered by semester
+      description: Returns a listing of classes offered by semester. Note that there
+        are only a few valid options. Students should only query the `fall2022` set.
       operationId: list_classes
       parameters:
       - name: buid
